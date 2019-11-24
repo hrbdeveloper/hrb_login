@@ -120,10 +120,22 @@
 
     $('.btnLogin').click(function () {
         if (err > 0) {
-            alert('نام کاربری موجود نمی باشد!');
+            hrb_alert(
+                [
+                    'warning',
+                    'عملیات ناموفق!',
+                    'نام کاربری موجود نمی باشد!',
+                    'ok'
+                ]);
         } else {
             if ($("#password").val().length < 6) {
-                alert('کلمه عبور باید بیش از 6 کاراکتر باشد!');
+                hrb_alert(
+                    [
+                        'warning',
+                        'عملیات ناموفق!',
+                        'کلمه عبور باید بیش از 6 کاراکتر باشد!',
+                        'ok'
+                    ]);
             } else {
                 $.each(obg, function ($index, $object) {
                     if ($object.username == $("#username").val()) {
@@ -134,13 +146,18 @@
                                     'عملیات موفق!',
                                     'شما با موفقیت وارد شدید',
                                     'ok'
-                                ],btnSend(this)
-                            );
+                                ]);
                             function btnSend(e) {
                                 console.log(e)
                             }
                         }else {
-                            alert('کلمه عبور نادرست است');
+                            hrb_alert(
+                                [
+                                    'warning',
+                                    'عملیات ناموفق!',
+                                    'کلمه عبور نامعتبر',
+                                    'ok'
+                                ]);
                         }
                     }
                 });
