@@ -1,0 +1,104 @@
+/*------------------------------- checkBox ------------------------*/
+.checkboxs , .inputBox  {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: unset;
+    margin: 5px 5px 5px 0;
+    cursor: pointer;
+    min-width: 160px;
+}
+.checkboxs h4.label {
+    position: relative;
+    margin: 0;
+    color: #008888;
+    width: calc(100% - 40px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: normal;
+    font-size: 18px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.checkboxs.focus h4.label {
+    color: #6315a2;
+}
+
+input[type=checkbox] , input[type=radio] {
+    /* visibility: hidden; */
+    opacity: 1;
+    width: 100%;
+    margin: 0;
+    z-index: -1;
+}
+
+/* SQUARED ONE */
+.squaredOne {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #fdfdfd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 0px;
+    transition: all 0.5s cubic-bezier(1, 0.1, 0, 1.4);
+    color: #008888;
+    background: #fff;
+    margin-left: 10px;
+    border: 1px solid #008888;
+    border-radius: 50px;
+}
+.checkboxs.focus .squaredOne {
+    color: #6315a2;
+    background: #fff;
+    border: 1px solid #6315a2;
+}
+.checkboxs.focus .squaredOne label:after {
+    background: #68299a;
+}
+.squaredOne label {
+    cursor: pointer;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 0px;
+    top: 0px;
+    background: transparent;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222', endColorstr='#45484d',GradientType=0 );
+    transition: all 0.5s cubic-bezier(1, 0.1, 0, 1.4);
+    margin: 0;
+}
+
+.squaredOne label:after {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #4fb3b9;
+    top: 2px;
+    left: 2px;
+    border-radius: 50px;
+    transition: all 1s;
+}
+
+.squaredOne label:hover::after {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+    filter: alpha(opacity=30);
+    opacity: 0.3;
+    border-radius: 50px;
+
+}
+
+.squaredOne input[type=checkbox]:checked + label:after , .squaredOne input[type=radio]:checked + label:after {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+/*------------------------------- checkBox ------------------------*/

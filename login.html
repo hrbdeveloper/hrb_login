@@ -1,0 +1,152 @@
+﻿<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login - ورود به پنل کاربری</title>
+    <link rel="stylesheet" href="dist/css/login.css">
+<body>
+<div class="loading_login"></div>
+<div class="login_icon fal fa-user">
+    <div class="user_avatar"></div>
+</div>
+
+<div class="content_login">
+    <h1>ورود به صفحه مدیریت</h1>
+    <div class="box_inputs">
+        <i class="fal fa-user"></i>
+        <label for="username">نام کاربری</label>
+        <input type="text" id="username" data-val="" placeholder="Username" tabindex="1">
+    </div>
+    <div class="moreBoxLogin">
+        <div class="box_inputs">
+            <i class="fal fa-key"></i>
+            <label for="password">کلمه عبور</label>
+            <input type="password" id="password" placeholder="Password" tabindex="2">
+        </div>
+        <div class="box_remember">
+            <div class="checkboxs">
+                <!-- Squared ONE -->
+                <div class="squaredOne">
+                    <input type="checkbox" value="None" id="gp1" name="check" tabindex="3">
+                    <label for="gp1"></label>
+                </div>
+                <h4 class="label"><small>مرا به خاطر بسپار</small></h4>
+            </div>
+        </div>
+        <div class="box_link">
+            <a href="reset-pass.html" class="forget_pass" tabindex="4"><i class="fal fa-arrow-left"></i>رمزتو فراموش
+                کردی ؟</a>
+        </div>
+        <div class="bottom_botton">
+            <button class="btnLogin" tabindex="5">ورود به سایت</button>
+        </div>
+
+    </div>
+    <div class="PoweredBy"><a target="_blank" href="http://barayand.net">طراحی و توسعه برایند تجربه</a></div>
+</div>
+</body>
+<script src="dist/js/jquery.min.js"></script>
+<script src="dist/js/login.js"></script>
+<script src="dist/js/hrb_alert.js"></script>
+<script>
+
+    var errU = 0;
+    var errP = 0;
+    var obg =
+        [
+            {
+                "username": "09182009667",
+                "password": "123456",
+                "pic": "dist/img/user1.png"
+            },
+            {
+                "username": "09121111111",
+                "password": "123456",
+                "pic": "dist/img/user2.png"
+            },
+            {
+                "username": "09378117703",
+                "password": "123456",
+                "pic": "dist/img/user3.png"
+            }
+        ];
+    $("#username").keyup(function () {
+        $t = $(this);
+        if ($t.val().length > 10) {
+            if ($t.attr('data-val') != $t.val()) {
+                $.each(obg, function ($index, $object) {
+                    $t.attr('data-val', $t.val());
+                    if ($object.username == $t.val()) {
+                        $t.attr('disabled', 'disabled');
+                        $(".login_icon").removeClass('stop').removeClass('userProf');
+                        $(".loading_login").removeClass('hide');
+                        setTimeout(function () {
+                            $('.login_icon').addClass('ok')
+                            $('.user_avatar').css({'background-image': 'url(' + $object.pic + ')'});
+                            $('.moreBoxLogin').slideDown(1000);
+                            $(".login_icon").addClass('stop').addClass('userProf');
+                            $(".loading_login").addClass('hide');
+                            $('input').removeAttr('disabled');
+                            err = 0;
+                        }, 2000);
+                        return false;
+                    } else {
+                        $('.login_icon').removeClass('ok');
+                        $('.user_avatar').removeAttr('style');
+                        $('.moreBoxLogin').slideUp(1000);
+                        $('.moreBoxLogin input').val('');
+                        if ($('.moreBoxLogin input[type=checkbox]').is(':checked')) {
+                            $('.moreBoxLogin input[type=checkbox]').click();
+                        }
+                        err = 1;
+                    }
+
+
+                });
+            }
+        } else {
+            $t.attr('data-val', $t.val());
+            $('.login_icon').removeClass('ok');
+            $('.user_avatar').removeAttr('style');
+            $('.moreBoxLogin').slideUp(1000);
+            $('.moreBoxLogin input').val('');
+            if ($('.moreBoxLogin input[type=checkbox]').is(':checked')) {
+                $('.moreBoxLogin input[type=checkbox]').click();
+            }
+        }
+    });
+
+    $('.btnLogin').click(function () {
+        if (err > 0) {
+            alert('نام کاربری موجود نمی باشد!');
+        } else {
+            if ($("#password").val().length < 6) {
+                alert('کلمه عبور باید بیش از 6 کاراکتر باشد!');
+            } else {
+                $.each(obg, function ($index, $object) {
+                    if ($object.username == $("#username").val()) {
+                        if($object.password == $("#password").val()){
+                            hrb_alert(
+                                [
+                                    'success',
+                                    'عملیات موفق!',
+                                    'شما با موفقیت وارد شدید',
+                                    'ok'
+                                ],btnSend(this)
+                            );
+                            function btnSend(e) {
+                                console.log(e)
+                            }
+                        }else {
+                            alert('کلمه عبور نادرست است');
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+</script>
+</html>
